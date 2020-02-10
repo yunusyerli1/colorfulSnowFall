@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Colorful Snow Fall</title>
+        <style>
+            .snow{
+                width:25px;
+                height:25px;
+                border-radius:50%;
+                position:absolute;
+
+            }
+        </style>
+    </head>
+    <body>
+
+       
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>
+            function randomColorGenerator(){
+                let letters="ABCDEF0123456789";
+                let str="#";
+                let random;
+                for (let i=0;i<6;i++){
+                    random=Math.floor(Math.random()*letters.length);
+                    str=str+letters.charAt(random);
+                }
+                return str;
+            }
+            function animate(element){
+                let counter = 0;
+                let timer = setInterval(function(){
+                    element.css({"top":element.position().top + (Math.random()*5)});
+                    if(element.position().top > window.innerHeight){
+                        element.css({"top":0});
+                        counter ++;
+                    }
+                    if(counter > 5){
+                        clearInterval(timer);
+                        element.css({"top":window.innerHeight});
+                    }
+                },20);
+
+
+            }
+
+
+            for (let i=0;i<50;i++){
+                animate($("<div>").addClass("snow").css({
+                    "background-color":randomColorGenerator(),
+                    "border":"1px solid black",
+                    "top":Math.floor(Math.random()*(window.innerHeight-50)),
+                    "left":Math.floor(Math.random()*(window.innerWidth-50))
+                }).appendTo("body"));
+                
+            }
+            
+        
+        
+        </script>
+    </body>
+</html>
